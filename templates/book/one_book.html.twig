@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block body %}
+
+    <div class="container" style="margin-top: 40px">
+        <h2>{{ book.title }}</h2>
+            <div class="list-group-item">
+            <div class="row">
+                <div class="col-4"><img src="{{ book.picture }}" alt="book picture" width="200" height="200" /></div>
+                <div class="col">
+                    <h5>By{{ book.author }}</h5>
+                    <p> First publication in {{ book.year }}</p>
+                    <p>{{ book.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
