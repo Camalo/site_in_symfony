@@ -34,8 +34,21 @@ class BooksController extends AbstractController
 
         $inf_book=$entity_manager->getRepository(Books::class)->find($book);
 
+        //find id of categories
+        $categories_of_book=$entity_manager->getRepository(BooksInCategories::class)
+            ->findBy(['book_id'=>$inf_book->getId()]);
+
+        $id=[];
+        foreach($categories_of_book as $category)
+        {
+            $id[]=$category->getCategoryId();
+        }
+
+        $categories=$entity_manager->getRepository(Categories::class)
+            ->findBy(['id'=>$id]);
+        
         return $this->render('book/one_book.html.twig',[
-            'book'=> $inf_book
+            'book'=> $inf_book, 'categories'=>$categories
         ]);
     }
     /**
