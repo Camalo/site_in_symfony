@@ -8,20 +8,19 @@
         <h4>категории</h4>
         <div class="row">
         <div class="col-3">
-            <div class="list-group">
-            {% for category in categories %}
-                <a href="{{ path('show_category',{'category': category.id}) }}" class="list-group-item list-group-item-action"> {{ category.title }} </a>
-
-            {% endfor %}
-            </div>
-        </div>
+                    <div class="list-group">
+                    {% for category in categories %}
+                        <a href="{{ path('show_category',{'category': category.id}) }}" class="list-group-item list-group-item-action"> {{ category.title }} </a>
+                    {% endfor %}
+                    </div>
+                </div>
 
         <div class="col-9">
             <div class="list-group">
             {% for book in books %}
                 <div class="list-group-item ">
                     <div class="row">
-                    <div class="col-2"><img src="{{ book.picture }}" alt="book picture" width="120" height="120" /></div>
+                    <div class="col-2"><img src="{{ book.picture }}" alt="book picture" width="90" height="120" /></div>
 
                     <div class="col"><div class="col d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ book.title }}</h5>

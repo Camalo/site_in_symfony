@@ -22,6 +22,8 @@ class Categories
      */
     private $title;
 
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -38,4 +40,5 @@ class Categories
 
         return $this;
     }
+
 }

@@ -27,7 +27,7 @@ class BooksInCategories
      */
     private $category_id;
 
-    public function getId(): ?int
+    public function getRowId(): ?int
     {
         return $this->id;
     }
