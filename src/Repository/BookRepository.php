@@ -41,7 +41,6 @@ class BookRepository extends ServiceEntityRepository
             ->innerJoin(BooksInCategories::class, 'bic','WITH', 'bic.book_id = b.id')
             ->andWhere('bic.category_id= :category')
             ->setParameter('category',$category)
-            ->groupBy('b.title')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
             ->getQuery();
