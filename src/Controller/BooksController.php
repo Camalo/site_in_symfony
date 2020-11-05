@@ -17,12 +17,16 @@ class BooksController extends AbstractController
     public function homepage(): Response
     {
         $entity_manager=$this->getDoctrine()->getManager();
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator = $bookRepository->getBooksPaginator($offset);
 
-        $books=$entity_manager->getRepository(Books::class)->findAll();
         $categories=$entity_manager->getRepository(Categories::class)->findAll();
 
         return $this->render('index.html.twig', [
-            'books' => $books, 'categories' => $categories
+            'books' => $paginator,
+            'categories' => $categories ,
+            'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
+            'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE)
         ]);
     }
     /**
@@ -56,27 +60,15 @@ class BooksController extends AbstractController
      */
     public function show_category($category)
     {
-        $entity_manager=$this->getDoctrine()->getManager();
-        // Get objects from table books_in_categories
-        $books_id = $entity_manager->getRepository(BooksInCategories::class)
-            ->findBy(['category_id'=>$category],['book_id'=>'ASC']);
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator=$bookRepository->getBookInCat($offset,$category);
 
-        // Get a id of book and put it in array $id
-        $id=[];
-        foreach($books_id as $book_id)
-        {
-            $id[]=$book_id->getBookId();
-        }
-
-        // Get objects from table books where id of book match value in array $id
-        $books=$entity_manager->getRepository(Books::class)
-            ->findBy(['id' => $id]); //=>$id);
-        //Get title of category
-        $category_title=$entity_manager->getRepository(Categories::class)
-            ->findOneBy(['id'=>$category]);
 
         return $this->render('category/category.html.twig',[
-            'books'=> $books, 'category_title'=>$category_title
+            'books'=> $paginator,
+            'category' => $category,
+            'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
+            'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE)
         ]);
     }
 }
