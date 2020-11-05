@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Books;
 use App\Entity\BooksInCategories;
 use App\Entity\Categories;
+use App\Repository\BookRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
