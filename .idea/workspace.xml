@@ -13,9 +13,7 @@
     <list default="true" id="7fe3c9dd-294f-4bca-89f5-1addb9f4ab09" name="Default Changelist" comment="add public dir">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/BooksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BooksController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BooksInCategories.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/BooksInCategories.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/book/one_book.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/book/one_book.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Books.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Books.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/category/category.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/category/category.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html.twig" afterDir="false" />
     </list>
@@ -164,6 +162,7 @@
       <workItem from="1604323592272" duration="12746000" />
       <workItem from="1604440341330" duration="4456000" />
       <workItem from="1604497059476" duration="21630000" />
+      <workItem from="1604570976767" duration="22537000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1604001433349</created>
@@ -211,10 +210,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="350" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1604444368253" />
-    <state x="371" y="96" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604337040734">
+    <state x="371" y="96" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604593991042">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="371" y="96" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680@0.0.1280.680" timestamp="1604337040734" />
+    <state x="371" y="96" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680@0.0.1280.680" timestamp="1604593991042" />
     <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1604422576414">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
