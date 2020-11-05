@@ -16,7 +16,7 @@ class BooksController extends AbstractController
     /**
      * @Route("/", name="homepage")
      */
-    public function homepage(): Response
+    public function homepage(Request $request,BookRepository $bookRepository): Response
     {
         $entity_manager=$this->getDoctrine()->getManager();
         $offset = max(0, $request->query->getInt('offset', 0));
@@ -60,7 +60,7 @@ class BooksController extends AbstractController
     /**
      * @Route("/categories/{category}", name="show_category")
      */
-    public function show_category($category)
+    public function show_category($category,Request $request,BookRepository $bookRepository)
     {
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator=$bookRepository->getBookInCat($offset,$category);
