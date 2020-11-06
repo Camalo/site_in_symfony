@@ -112,7 +112,7 @@ class AppUserAuthenticator extends AbstractFormLoginAuthenticator implements Pas
             $targetP = $this->urlGenerator->generate('admin');
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('admin'));
+        return new RedirectResponse($targetP);
     }
 
     protected function getLoginUrl()
