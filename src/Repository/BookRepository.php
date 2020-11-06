@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Books;
 use App\Entity\BooksInCategories;
-use App\Entity\Categories;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;

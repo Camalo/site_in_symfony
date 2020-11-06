@@ -11,11 +11,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fe3c9dd-294f-4bca-89f5-1addb9f4ab09" name="Default Changelist" comment="add public dir">
+      <change beforePath="$PROJECT_DIR$/.idea/libraBooks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraBooks.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/BooksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BooksController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Books.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Books.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/category/category.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/category/category.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/BookRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/BookRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,6 +119,11 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-icu" />
       <path value="$PROJECT_DIR$/vendor/symfony/intl" />
       <path value="$PROJECT_DIR$/vendor/symfony/form" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-guard" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-core" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-csrf" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-http" />
     </include_path>
   </component>
   <component name="ProjectId" id="1jPoRTBQbV3dXA1osnNWEmF0RxW" />
@@ -162,7 +172,8 @@
       <workItem from="1604323592272" duration="12746000" />
       <workItem from="1604440341330" duration="4456000" />
       <workItem from="1604497059476" duration="21630000" />
-      <workItem from="1604570976767" duration="22537000" />
+      <workItem from="1604570976767" duration="27429000" />
+      <workItem from="1604654241850" duration="1154000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1604001433349</created>

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\Routing\Annotation\Route;
-//use Doctrine\ORM\Tools\Pagination\Paginator;
+
 
 class BooksController extends AbstractController
 {
@@ -72,28 +72,11 @@ class BooksController extends AbstractController
      */
     public function show_category($category,Request $request,BookRepository $bookRepository)
     {
-        $entity_manager=$this->getDoctrine()->getManager();
+        
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator=$bookRepository->getBookInCat($offset,$category);
 
-        /* Get objects from table books_in_categories
-        $books_id = $entity_manager->getRepository(BooksInCategories::class)
-            ->findBy(['category_id'=>$category],['book_id'=>'ASC']);*/
 
-        /* Get a id of book and put it in array $id
-        $id=[];
-        foreach($books_id as $book_id)
-        {
-            $id[]=$book_id->getBookId();
-        }
-
-        // Get objects from table books where id of book match value in array $id
-        $books=$entity_manager->getRepository(Books::class)
-            ->findBy(['id' => $id]); //=>$id);
-        //Get title of category
-        $category_title=$entity_manager->getRepository(Categories::class)
-            ->findOneBy(['id'=>$category]);
-           */
         return $this->render('category/category.html.twig',[
             'books'=> $paginator,
             'category' => $category,
