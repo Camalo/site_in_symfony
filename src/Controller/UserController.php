@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-
+    //hash_password=$argon2i$v=19$m=65536,t=4,p=1$dDV5bHQ2V01vY1JibjRsMg$xPp5Sy4ddiWSM0nONn3AiBT+4W0EGCHtmAyIEGOXic4
     /*
     public function index(): Response
     {
@@ -20,42 +20,23 @@ class UserController extends AbstractController
         );
     }*/
     /**
-     * @Route("/login", name="login")
+     * @Route("/logina", name="login")
      */
     public function actionForm(Request $request)
     {
         $form =$this->createForm(UserLoginType::class);
-        //обработка данных
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            //check specialchars
-            $data = $form->getData();
-            // запрос к бд (выборка юзера с этим паролем и логином)
-            $em=$this->getDoctrine()->getManager();
-            $user=$em->getRepository(User::class)->
-            findOneBy(['login'=>$data->getLogin(), 'password'=> $data->getPassword()]);
-            // есть ли совпадение с этим логином и паролем в бд
-            if ($user == null) return  $this->redirectToRoute('user/login.html.twig');
-
-            $user_role=$user->getRole();
-            // Переход на страницу админа
-            if ($user_role=='admin') return $this->render('user/admin.html.twig');
-            // Переход на страницу манагера
-            return $this->render('user/manager.html.twig');
-        }
 
 
         return $this->render('user/login.html.twig',[
-            'form'=>$form->createView()
+            'login_form'=>$form->createView()
             ]);
     }
 
 
 
     /**
-     * @Route("/admin", name="task_success")
+     * @Route("/admina", name="task_success")
      */
     public function success()
     {
