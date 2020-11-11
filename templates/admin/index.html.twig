@@ -3,5 +3,26 @@
 {% block title %}Hello AdminController!{% endblock %}
 
 {% block body %}
-<h3>Admin console<h3>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xs-12 col-sm-12 col-md-12 m-2">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">email</th>
+                        <th scope="col">role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>manager</td>
+                    </tr>
+                    {% endfor %}
+                <tbody>
+            </table>
 {% endblock %}
