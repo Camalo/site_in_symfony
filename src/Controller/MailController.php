@@ -40,15 +40,15 @@ class MailController extends AbstractController
                     ->setSubject('наконец-то получилось')
                     ->setBody(
                         $this->renderView(
-                            '/mail/email.html.twig'
+                            '/mail/email.html.twig',
+                            ['userid'=>$registered_user->getId()]
                         ),
                         'text/html'
                     );
                 $mailer->send($message);
 
-                return $this->redirectToRoute('resetPassword',[
-                    'userid'=>$registered_user->getId()
-            ]);
+                return $this->render('mail/waiting.html.twig');
+
             }
 
 
