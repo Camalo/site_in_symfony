@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -17,9 +18,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
+    private $mailer;
+    private $adminEmail;
+
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
+        $this->mailer = null;
+        $this->adminEmail = null;
     }
 
     /**
@@ -35,6 +42,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
+/*
+    public function sendMail(\Swift_Mailer $mailer): Response
+    {
+        $name="Таня";
+        $this->mailer->send((new NotificationEmail())
+        ->subject('New comment posted')
+        ->htmlTemplate('mail/index.html.twig')
+        ->from($this->adminEmail)
+        ->to('smetanina2002sme@gmail.com')
+        ->context(['name' => $name])
+        );*/
+
 
     // /**
     //  * @return User[] Returns an array of User objects

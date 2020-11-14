@@ -85,6 +85,26 @@ class BooksController extends AbstractController
             'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE)
         ]);
     }
+    //Реализация поиска
+    /**
+     * @Route("/searching", name="search_book")
+     */
+    public function searchBook(Request $request,BookRepository $bookRepository)
+    {
+        $q = $_REQUEST['q'];
+
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator=$bookRepository->findBooks($offset,$q);
+
+
+        return $this->render('book/searching.html.twig',[
+            'books'=> $paginator,
+            'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
+            'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE)
+        ]);
+    }
+
+
 
     /**
      * @Route("/manager/new", name="new_book")

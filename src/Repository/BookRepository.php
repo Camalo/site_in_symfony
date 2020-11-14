@@ -47,6 +47,22 @@ class BookRepository extends ServiceEntityRepository
 
         return new Paginator($query);
     }
+
+    public function findBooks(int $offset, $q)
+    {
+        $query = $this->createQueryBuilder('b')
+            ->where('b.title LIKE :search_item')
+            ->orWhere('b.author LIKE :search_item')
+            ->orWhere('b.description LIKE :search_item')
+            ->setParameter('search_item', '%'.$q.'%')
+            ->groupBy('b.title')
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery();
+
+        return new Paginator($query);
+    }
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */

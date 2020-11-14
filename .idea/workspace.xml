@@ -11,20 +11,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fe3c9dd-294f-4bca-89f5-1addb9f4ab09" name="Default Changelist" comment="add public dir">
-      <change afterPath="$PROJECT_DIR$/templates/manager/new.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/manager/update.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/book/searching.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/mail/email.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraBooks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraBooks.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/BooksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BooksController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ManagerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ManagerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/BookRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/BookRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/manager/addBook.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/manager/delete.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/manager/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/manager/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/admin.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/login.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/manager.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +130,11 @@
       <path value="$PROJECT_DIR$/vendor/symfony/security-csrf" />
       <path value="$PROJECT_DIR$/vendor/symfony/security-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/security-http" />
-      <path value="$PROJECT_DIR$/vendor/sensio/framework-extra-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/swiftmailer-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/asset" />
     </include_path>
   </component>
   <component name="ProjectId" id="1jPoRTBQbV3dXA1osnNWEmF0RxW" />
@@ -179,7 +185,12 @@
       <workItem from="1604497059476" duration="21630000" />
       <workItem from="1604570976767" duration="27429000" />
       <workItem from="1604654241850" duration="26724000" />
-      <workItem from="1605087800112" duration="23255000" />
+      <workItem from="1605087800112" duration="25259000" />
+      <workItem from="1605201166114" duration="7964000" />
+      <workItem from="1605259323887" duration="8284000" />
+      <workItem from="1605280243330" duration="222000" />
+      <workItem from="1605301602210" duration="5951000" />
+      <workItem from="1605355724736" duration="8338000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1604001433349</created>
@@ -223,14 +234,14 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="377" y="143" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680@0.0.1280.680" timestamp="1604337816177" />
-    <state x="350" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1604444368253">
+    <state x="350" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1605365867762">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="350" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1604444368253" />
-    <state x="371" y="96" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605100965999">
+    <state x="350" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1605365867762" />
+    <state x="371" y="96" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605266219511">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="371" y="96" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680@0.0.1280.680" timestamp="1605100965999" />
+    <state x="371" y="96" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680@0.0.1280.680" timestamp="1605266219511" />
     <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1604422576414">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -247,6 +258,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="444" y="46" key="Github.UntrackedFilesDialog/0.0.1280.680@0.0.1280.680" timestamp="1604000514833" />
+    <state x="477" y="264" key="NewPhpFileDialog" timestamp="1605265687028">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="477" y="264" key="NewPhpFileDialog/0.0.1280.680@0.0.1280.680" timestamp="1605265687028" />
     <state x="224" y="0" width="1056" height="680" key="SettingsEditor" timestamp="1604005063997">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -255,10 +270,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="458" y="255" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1604444820865" />
-    <state x="297" y="151" key="run.anything.popup" timestamp="1603974584339">
+    <state x="297" y="151" key="run.anything.popup" timestamp="1605264915076">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1603974584339" />
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1605264915076" />
     <state x="471" y="132" key="svn.repositoryBrowser" timestamp="1604000669611">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

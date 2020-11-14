@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MailController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 mt-4">
+            <h4>Востановление пароля</h4>
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button class="btn btn-lg btn-primary mt-4 " type="submit">
+                        Отправить
+                    </button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

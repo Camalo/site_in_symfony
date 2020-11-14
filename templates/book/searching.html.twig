@@ -1,20 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}My symfony{% endblock %}
+{% block title %}Hello BookController!{% endblock %}
 
 {% block body %}
-
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-xs-12 col-sm-3 col-md-2 m-0 mt-4">
-            <div class="nav flex-column">
-                {% for category in categories %}
-                    <li class="nav-item rounded">
-                        <a href="{{ path('show_category',{'category': category.id}) }}" class="list-group-item list-group-item-action"> {{ category.title }} </a>
-                    </li>
-                {% endfor %}
-            </div>
-        </div>
         <div class="col-xs-12 col-sm-9 col-md-8">
             <ul class="list-unstyled">
                 {% for book in books %}
@@ -51,15 +41,6 @@
                 </nav>
             </ul>
         </div>
-        <div class="col-xs-12 col-sm-3 col-md-2 mt-4">
-             <form class="form-inline my-2 my-lg-0" action="{{ path('search_book') }}" method="get">
-                 <input class="form-control mr-sm-2" type="search" placeholder="найти" aria-label="Search" name="q">
-                 <div class="row justify-content-center m-2">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
-                 </div>
-             </form>
-        </div>
     </div>
 </div>
-
 {% endblock %}
