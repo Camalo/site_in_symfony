@@ -31,24 +31,63 @@
                         </div>
                     </li>
                 {% endfor %}
-                <nav aria-label="Page navigation ">
+
+
+                <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
                         <li class="page-item">
                             {% if previous >= 0 %}
-                                <a class="page-link" href="{{ path('homepage', { offset: previous }) }}">
+                                <a class="page-link" href="{{ path('homepage', { offset: previous , perPage: perpage}) }}">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             {% endif %}
                         </li>
+                            {% if previous > 0 and  next < (books|length - 1)%}
+                                {% for i in 0..(books|length / perpage) %}
+                                    {% if next+1 >= i and previous-1 <= i %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ path('homepage', { offset: i * perpage,  perPage: perpage }) }}">{{ i+1 }}</a>
+                                    </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% elseif next < (books|length + 1) and previous > 0%}
+                                {% for i in (books|length / perpage - 3)..(books|length / perpage-1) %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ path('homepage', { offset: i * perpage,  perPage: perpage }) }}">end{{ i+1 }}</a>
+                                    </li>
+                                {% endfor %}
+                            {% else%}
+                            {% for i in 0..4 %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ path('homepage', { offset: i * perpage,  perPage: perpage }) }}">beg{{ i+1 }}</a>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+
+
+
                         <li class="page-item">
                             {% if next < books|length %}
-                                <a class="page-link" href="{{ path('homepage', { offset: next }) }}">
+                                <a class="page-link" href="{{ path('homepage', { offset: next, perPage: perpage }) }}">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             {% endif %}
                         </li>
                     </ul>
                 </nav>
+
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-sm-6 col-md-3 mt-3">
+                        <form class="form-inline my-2 my-lg-0" method="get">
+                            {# <input class="form-control form-control-sm mr-3" type="goto" placeholder="страницу №" aria-label="goto" name="goto">#}
+                            <input class="form-control form-control-sm mr-3" type="perpage" placeholder="по столько" value="{{ perpage }}" aria-label="perpage" name="perPage">
+                            <button class="btn btn-outline-secondary my-2 my-sm-0 btn-sm" type="submit">Отобразить</button>
+                        </form>
+                    </div>
+                </div>
+
+
+
             </ul>
         </div>
         <div class="col-xs-12 col-sm-3 col-md-2 mt-4">

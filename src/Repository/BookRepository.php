@@ -23,10 +23,12 @@ class BookRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Books::class);
     }
-    public function getBooksPaginator(int $offset): Paginator
+    public function getBooksPaginator(int $offset, int $perPage): Paginator
     {
+        //offset смещение
+        //perPage на одной странице
         $query = $this->createQueryBuilder('b')
-            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setMaxResults($perPage)
             ->setFirstResult($offset)
             ->getQuery();
 

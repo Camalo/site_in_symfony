@@ -11,10 +11,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fe3c9dd-294f-4bca-89f5-1addb9f4ab09" name="Default Changelist" comment="add public dir">
-      <change afterPath="$PROJECT_DIR$/templates/mail/waiting.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MailController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/email.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/email.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/BooksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BooksController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/BookRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/BookRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +178,8 @@
       <workItem from="1605259323887" duration="8284000" />
       <workItem from="1605280243330" duration="222000" />
       <workItem from="1605301602210" duration="5951000" />
-      <workItem from="1605355724736" duration="26082000" />
+      <workItem from="1605355724736" duration="27316000" />
+      <workItem from="1605532084896" duration="14640000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1604001433349</created>
@@ -258,10 +259,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="458" y="255" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1604444820865" />
-    <state x="297" y="151" key="run.anything.popup" timestamp="1605264915076">
+    <state x="297" y="151" key="run.anything.popup" timestamp="1605541419414">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1605264915076" />
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1605541419414" />
     <state x="471" y="132" key="svn.repositoryBrowser" timestamp="1604000669611">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

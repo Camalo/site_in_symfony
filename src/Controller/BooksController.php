@@ -27,16 +27,22 @@ class BooksController extends AbstractController
     public function homepage(Request $request,BookRepository $bookRepository): Response
     {
         $entity_manager=$this->getDoctrine()->getManager();
+        //Смещение на 'offset' записей
         $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $bookRepository->getBooksPaginator($offset);
+        //отображение записей на одной странице, по умолчанию равно 10
+        $perPage = max(1, $request->query->getInt('perPage', 10));
+
+
+        $paginator = $bookRepository->getBooksPaginator($offset,$perPage);
 
         $categories=$entity_manager->getRepository(Categories::class)->findAll();
 
         return $this->render('index.html.twig', [
             'books' => $paginator,
             'categories' => $categories ,
-            'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
-            'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE)
+            'previous' => $offset - $perPage,
+            'next'=> min(count($paginator), $offset + $perPage),
+            'perpage'=>$perPage
         ]);
     }
 
