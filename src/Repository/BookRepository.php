@@ -50,6 +50,20 @@ class BookRepository extends ServiceEntityRepository
         return new Paginator($query);
     }
 
+    public function getBooksToAdd(int $offset, int $perPage,int $category)
+    {
+        $query = $this->createQueryBuilder('b')
+            //НЕ ИЗМЕНЯЛА ЕЩЕ
+            ->join(BooksInCategories::class, 'bic','WITH', 'bic.book_id = b.id')
+            ->andWhere('bic.category_id <> :category')
+            ->setParameter('category',$category)
+            ->groupBy('b.title')
+            ->setMaxResults($perPage)
+            ->setFirstResult($offset)
+            ->getQuery();
+
+        return new Paginator($query);
+    }
     public function findBooks(int $offset, $q)
     {
         $query = $this->createQueryBuilder('b')

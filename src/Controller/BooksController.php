@@ -5,10 +5,15 @@ namespace App\Controller;
 use App\Entity\Books;
 use App\Entity\BooksInCategories;
 use App\Entity\Categories;
+use App\Form\AddBookInCatType;
+use App\Form\AddBookType;
 use App\Form\BookType;
+use App\Form\CategoriesType;
 use App\Repository\BookRepository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -110,73 +115,6 @@ class BooksController extends AbstractController
         ]);
     }
 
-
-
-    /**
-     * @Route("/manager/new", name="new_book")
-     */
-    public function newBook(Request $request):Response
-    {
-        $book = new Books();
-        $form =$this->createForm(BookType::class,$book);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $book=$form->getData();
-            $em=$this->getDoctrine()->getManager();
-            $em->persist($book);
-            $em->flush();
-
-            return $this->redirectToRoute("manager");
-        }
-        return $this->render("manager/new.html.twig",[
-            'form'=>$form->createView()
-
-        ]);
-    }
-    /**
-     * @Route("/manager/update/{id}", name="update_book")
-     */
-    public function updateBook(Request $request, $id)//:Response
-    {
-        $em=$this->getDoctrine()->getManager();
-        $book=$em->getRepository(Books::class)->find($id);
-
-        $form = $this->createForm(BookType::class,$book);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $book=$form->getData();
-            //$em=$this->getDoctrine()->getManager();
-
-            $em->flush();
-
-            return $this->redirectToRoute("manager");
-        }
-        return $this->render("manager/update.html.twig",[
-            'form'=>$form->createView(),
-            'book'=>$book
-        ]);
-    }
-
-
-
-    /**
-     * @Route("/manager/delete/{id}", name="delete_book")
-     */
-    public function deleteBook($id)
-    {
-        $em=$this->getDoctrine()->getManager();
-        $book=$em->getRepository(Books::class)->find($id);
-        $em->remove($book);
-        $em->flush();
-
-        return $this->render('manager/delete.html.twig',[
-            'book'=>$book
-        ]);
-    }
 
 
 }

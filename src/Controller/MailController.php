@@ -78,10 +78,7 @@ class MailController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $registered_user = $em->getRepository(User::class)->findOneBy(['id'=>$userid]);
             //получить пассворт из формы
-            /*
-            $password=$request->request->get('password');
-            $user->setPassword($password);
-            */
+
             //$password=$encoder->encodePassword($user,strval($request->request->get('password')));
             $user=$form->getData();
             $password=$password=$encoder->encodePassword($user,$user->getPassword());

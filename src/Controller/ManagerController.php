@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Books;
+use App\Entity\BooksInCategories;
 use App\Entity\Categories;
 use App\Form\BookType;
 use App\Form\CategoriesType;
@@ -25,7 +26,9 @@ class ManagerController extends AbstractController
         }
         $entity_manager=$this->getDoctrine()->getManager();
         $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $bookRepository->getBooksPaginator($offset);
+        $perPage = max(1, $request->query->getInt('perPage', 10));
+
+        $paginator = $bookRepository->getBooksPaginator($offset, $perPage);
 
         $categories=$entity_manager->getRepository(Categories::class)->findAll();
         //form
@@ -46,9 +49,171 @@ class ManagerController extends AbstractController
         return $this->render('manager/index.html.twig', [
             'books' => $paginator,
             'categories' => $categories ,
+            'previous' => $offset - $perPage,
+            'next'=> min(count($paginator), $offset + $perPage),
+            'perpage'=>$perPage,
+            'form'=> $form->createView()
+        ]);
+    }
+
+
+    /**
+     * @Route("/manager/new", name="new_book")
+     */
+    public function newBook(Request $request):Response
+    {
+        $book = new Books();
+        $form =$this->createForm(BookType::class,$book);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $book=$form->getData();
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($book);
+            $em->flush();
+
+            return $this->redirectToRoute("add_to",[
+                'id'=>$book->getId()
+            ]);
+        }
+        return $this->render("manager/new.html.twig",[
+            'form'=>$form->createView()
+
+        ]);
+    }
+    /**
+     * @Route("/manager/update/{id}", name="update_book")
+     */
+    public function updateBook(Request $request, $id)//:Response
+    {
+        $em=$this->getDoctrine()->getManager();
+        $book=$em->getRepository(Books::class)->find($id);
+
+        $form = $this->createForm(BookType::class,$book);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $book=$form->getData();
+            //$em=$this->getDoctrine()->getManager();
+
+            $em->flush();
+
+            return $this->redirectToRoute("manager");
+        }
+        return $this->render("manager/update.html.twig",[
+            'form'=>$form->createView(),
+            'book'=>$book
+        ]);
+    }
+
+
+
+    /**
+     * @Route("/manager/delete/{id}", name="delete_book")
+     */
+    public function deleteBook($id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $book=$em->getRepository(Books::class)->find($id);
+        $em->remove($book);
+        $em->flush();
+
+        return $this->render('manager/delete.html.twig',[
+            'name'=>$book->getTitle()
+        ]);
+    }
+    /**
+     * @Route("/manager/update_cat/{id}", name="update_cat")
+     */
+    public function updateCat($id,Request $request,BookRepository $bookRepository)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $editing_category = $em->getRepository(Categories::class)->find($id);
+
+        //переименование категории
+        $form =$this->createForm(CategoriesType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $category = $form->getData();
+            $editing_category->setTitle($category->getTitle());
+            $em->flush();
+        }
+
+
+
+        //вывести список книг из этой категории
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator=$bookRepository->getBookInCat($offset,$id);
+        //удалить выбранную книгу из категории(удалить из таблицы bic)
+
+        return $this->render('manager/updateCat.html.twig',[
+            'books'=> $paginator,
+            'category' => $editing_category,
             'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
             'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE),
             'form'=> $form->createView()
+        ]);
+
+    }
+
+    /**
+     * @Route("/manager/add_to/{id}", name="add_to")
+     */
+    public function addBook(Request $request,$id)
+    {
+        //id-индекс книги
+        $form =$this->createForm(CategoriesType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            //выбрать id категории по имени
+            $categoryInForm=$form->getData();
+            $em=$this->getDoctrine()->getManager();
+            $category=$em->getRepository(Categories::class)
+                ->findOneBy(['title'=>$categoryInForm->getTitle()]);
+            $bic=new BooksInCategories();
+            $bic->setBookId((int)$id);
+            $bic->setCategoryId($category->getId());
+            $em->persist($bic);
+            $em->flush();
+            return $this->redirectToRoute('manager');
+        }
+        return $this->render('manager/AddTo.html.twig',[
+            'form'=> $form->createView(),
+            'id' => $id
+        ]);
+    }
+    /**
+     * @Route("/manager/delete_category/{id}", name="delete_category")
+     */
+    public function deleteCategory($id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $category=$em->getRepository(Categories::class)->find($id);
+        $em->remove($category);
+        $em->flush();
+
+        return $this->render('manager/delete.html.twig',[
+            'name'=> $category->getTitle()
+        ]);
+    }
+
+    /**
+     * @Route("/manager/delete_from/{catid}/{bookid}", name="delete_from")
+     */
+    public function deleteFrom($catid,$bookid)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $bic=$em->getRepository(BooksInCategories::class)
+            ->findOneBy(['category_id'=>$catid,'book_id'=>$bookid]);
+        $em->remove($bic);
+        $em->flush();
+
+        return $this->render('manager/delete.html.twig',[
+            'name'=> ""
         ]);
     }
 

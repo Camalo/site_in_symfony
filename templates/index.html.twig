@@ -53,13 +53,13 @@
                             {% elseif next < (books|length + 1) and previous > 0%}
                                 {% for i in (books|length / perpage - 3)..(books|length / perpage-1) %}
                                     <li class="page-item">
-                                        <a class="page-link" href="{{ path('homepage', { offset: i * perpage,  perPage: perpage }) }}">end{{ i+1 }}</a>
+                                        <a class="page-link" href="{{ path('homepage', { offset: i * perpage,  perPage: perpage }) }}">{{ i+1 }}</a>
                                     </li>
                                 {% endfor %}
                             {% else%}
                             {% for i in 0..4 %}
                                     <li class="page-item">
-                                        <a class="page-link" href="{{ path('homepage', { offset: i * perpage,  perPage: perpage }) }}">beg{{ i+1 }}</a>
+                                        <a class="page-link" href="{{ path('homepage', { offset: i * perpage,  perPage: perpage }) }}">{{ i+1 }}</a>
                                     </li>
                                 {% endfor %}
                             {% endif %}

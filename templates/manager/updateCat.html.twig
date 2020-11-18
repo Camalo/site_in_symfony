@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}категория
+
+{% endblock %}
+
+{% block body %}
+{# добавить форму для смены категории #}
+{# добавить кнопку "добавить книги в категории" #}
+<div class="container">
+    <div class="row justify-content-start">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <h4 class="text-center">{{ category.title }}</h4>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-6">
+        {{ form_start(form) }}
+            <div class="m-3 mb-5">
+                <div class="form-group">
+                    <label>Category new name:</label>
+                    <div>{{form_widget(form.title,{'attr': {'class': 'form-control','value': category.title }})}}</div>
+                </div>
+                <button class="btn btn-primary">{{ button_label|default('Rename') }}</button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-lg-12 border-bottom pb-0 ">
+        <p class="text-light">Books in category '{{ category.title }}'</p>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-lg-12">
+        <table class="table table-light table-bordered mt-3">
+            <thead class="thead-light ">
+                <tr>
+                    <th>id</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Year</th>
+                    <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in books %}
+                            <tr>
+                                <td>{{ book.id }}</td>
+                                <td>{{ book.title }}</td>
+                                <td>{{book.author}}</td>
+                                <td>{{ book.year }}</td>
+                                <td><a class="btn btn-outline-primary" href="{{ path('delete_from', { catid: category.id, bookid: book.id }) }}">Удалить из категории</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <nav aria-label="Page navigation ">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            {% if previous >= 0 %}
+                                <a class="page-link" href="{{ path('update_cat', { id: category.id, offset: previous }) }}">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            {% endif %}
+                        </li>
+                        <li class="page-item">
+                            {% if next < books|length %}
+                                <a class="page-link" href="{{ path('update_cat', { id: category.id, offset: next }) }}">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </nav>
+            </ul>
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}

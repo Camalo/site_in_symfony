@@ -11,10 +11,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fe3c9dd-294f-4bca-89f5-1addb9f4ab09" name="Default Changelist" comment="add public dir">
+      <change afterPath="$PROJECT_DIR$/templates/admin/newUser.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/updateUser.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/manager/updateCat.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/manager/updateCatAddBook.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/BooksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BooksController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MailController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ManagerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ManagerController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/BookRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/BookRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/addUser.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/deleteUser.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/book/one_book.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/book/one_book.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/manager/delete.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/manager/delete.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/manager/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/manager/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +191,10 @@
       <workItem from="1605280243330" duration="222000" />
       <workItem from="1605301602210" duration="5951000" />
       <workItem from="1605355724736" duration="27316000" />
-      <workItem from="1605532084896" duration="14640000" />
+      <workItem from="1605532084896" duration="15530000" />
+      <workItem from="1605555236229" duration="7781000" />
+      <workItem from="1605695078604" duration="15850000" />
+      <workItem from="1605720230201" duration="15340000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1604001433349</created>
@@ -223,14 +238,14 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="377" y="143" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680@0.0.1280.680" timestamp="1604337816177" />
-    <state x="350" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1605373105158">
+    <state x="350" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1605717182524">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="350" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1605373105158" />
-    <state x="371" y="96" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605266219511">
+    <state x="350" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1605717182524" />
+    <state x="371" y="96" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1605739484569">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="371" y="96" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680@0.0.1280.680" timestamp="1605266219511" />
+    <state x="371" y="96" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1280.680@0.0.1280.680" timestamp="1605739484569" />
     <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1604422576414">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
