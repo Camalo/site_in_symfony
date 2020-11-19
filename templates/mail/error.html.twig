@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MailController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xs-12 col-sm-6 col-md-4 mt-4">
+            <h4>Пользователь не зарегистрирован</h4>
+                <a class="btn btn-lg btn-primary mt-4 " href="{{ path('mail') }}"><p>указать другой email</p></a>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
