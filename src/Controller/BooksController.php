@@ -26,7 +26,7 @@ class BooksController extends AbstractController
 
 
     /**
-     * @Route("public/", name="homepage")
+     * @Route("/", name="homepage")
      */
     public function homepage(Request $request,BookRepository $bookRepository): Response
     {
