@@ -18,13 +18,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("public/admin", name="admin")
+     * @Route("/admin", name="admin")
      */
     public function index(AuthorizationCheckerInterface $authChecker): Response
     {
         //проверка прав доступа
         if (false === $authChecker->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('manager');
+            return $this->redirect('public/manager');
         }
 
         $em=$this->getDoctrine()->getManager();
