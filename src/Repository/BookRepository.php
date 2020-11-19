@@ -42,7 +42,7 @@ class BookRepository extends ServiceEntityRepository
             ->innerJoin(BooksInCategories::class, 'bic','WITH', 'bic.book_id = b.id')
             ->andWhere('bic.category_id= :category')
             ->setParameter('category',$category)
-            ->groupBy('b.title')
+           
             ->setMaxResults($perPage)
             ->setFirstResult($offset)
             ->getQuery();
@@ -57,7 +57,7 @@ class BookRepository extends ServiceEntityRepository
             ->join(BooksInCategories::class, 'bic','WITH', 'bic.book_id = b.id')
             ->andWhere('bic.category_id <> :category')
             ->setParameter('category',$category)
-            ->groupBy('b.title')
+            
             ->setMaxResults($perPage)
             ->setFirstResult($offset)
             ->getQuery();
@@ -71,7 +71,7 @@ class BookRepository extends ServiceEntityRepository
             ->orWhere('b.author LIKE :search_item')
             ->orWhere('b.description LIKE :search_item')
             ->setParameter('search_item', '%'.$q.'%')
-            ->groupBy('b.title')
+          
             ->setMaxResults($perPage)
             ->setFirstResult($offset)
             ->getQuery();
