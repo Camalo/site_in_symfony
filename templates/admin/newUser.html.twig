@@ -18,10 +18,8 @@
                         <label>Password</label>
                         <div>{{form_widget(form.password,{'attr': {'class': 'form-control' }})}}</div>
 
-                        <label>Role</label>
-                        <div>{{form_widget(form.roles[0],{'attr': {'class': 'form-control' }})}}</div>
-                    </div>
-                    <button class="btn btn-primary">{{ button_label|default('Rename') }}</button>
+                        </div>
+                    <button class="btn btn-primary">{{ button_label|default('Создать') }}</button>
 
                 </div>
             {{ form_end(form) }}
