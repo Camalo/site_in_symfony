@@ -3,7 +3,6 @@
 namespace App\Security;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,15 +66,15 @@ class AppUserAuthenticator extends AbstractFormLoginAuthenticator implements Pas
         return $credentials;
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider/*,UserRepository $repository*/)
+    public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
 
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
-        $rep=new UserRepository;
-        $user = $rep->findOneBySomeField($credentials['email']);
+
+        $user = $this->entityManager->getRepository(User::class)->findBy(['email' => $credentials['email']]);
 
 
         if (!$user) {
