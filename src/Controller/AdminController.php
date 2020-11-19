@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/public/admin", name="admin")
+     * @Route("public/admin", name="admin")
      */
     public function index(AuthorizationCheckerInterface $authChecker): Response
     {
@@ -35,7 +35,7 @@ class AdminController extends AbstractController
         ]);
     }
     /**
-     * @Route("/public/admin/new", name="new_user")
+     * @Route("public/admin/new", name="new_user")
      */
     public function newUser(Request $request,UserPasswordEncoderInterface $encoder)
     {
@@ -68,7 +68,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/public/admin/update/{id}", name="update_user")
+     * @Route("public/admin/update/{id}", name="update_user")
      */
     public function updateUser(Request $request,UserPasswordEncoderInterface $encoder, $id)
     {
