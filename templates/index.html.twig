@@ -10,7 +10,7 @@
             <div class="nav flex-column">
                 {% for category in categories %}
                     <li class="nav-item rounded">
-                        <a href="{{ path('show_category',{'category': category.id}) }}" class="list-group-item list-group-item-action"> {{ category.title }} </a>
+                        <a href="{{ path('show_category',{'category': category.id, 'name': category.title}) }}" class="list-group-item list-group-item-action"> {{ category.title }} </a>
                     </li>
                 {% endfor %}
             </div>
@@ -42,29 +42,6 @@
                                 </a>
                             {% endif %}
                         </li>
-                            {% if previous > 0 and  next < (books|length - 1)%}
-                                {% for i in 0..(books|length / perpage) %}
-                                    {% if next+1 >= i and previous-1 <= i %}
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ path('homepage', { offset: i * perpage,  perPage: perpage }) }}">{{ i+1 }}</a>
-                                    </li>
-                                    {% endif %}
-                                {% endfor %}
-                            {% elseif next < (books|length + 1) and previous > 0%}
-                                {% for i in (books|length / perpage - 3)..(books|length / perpage-1) %}
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ path('homepage', { offset: i * perpage,  perPage: perpage }) }}">{{ i+1 }}</a>
-                                    </li>
-                                {% endfor %}
-                            {% else%}
-                            {% for i in 0..4 %}
-                                    <li class="page-item">
-                                        <a class="page-link" href="{{ path('homepage', { offset: i * perpage,  perPage: perpage }) }}">{{ i+1 }}</a>
-                                    </li>
-                                {% endfor %}
-                            {% endif %}
-
-
 
                         <li class="page-item">
                             {% if next < books|length %}
