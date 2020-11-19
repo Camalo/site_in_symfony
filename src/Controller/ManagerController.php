@@ -17,13 +17,13 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class ManagerController extends AbstractController
 {
     /**
-     * @Route("public/manager", name="manager")
+     * @Route("/manager", name="manager")
      */
     public function index(AuthorizationCheckerInterface $authChecker,Request $request,BookRepository $bookRepository): Response
     {
         //проверка прав доступа
         if (false === $authChecker->isGranted('ROLE_MANAGER')) {
-            return $this->redirectToRoute('app_login');
+            return $this->redirect('public/login');
         }
         $entity_manager=$this->getDoctrine()->getManager();
         $offset = max(0, $request->query->getInt('offset', 0));
