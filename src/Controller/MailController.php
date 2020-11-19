@@ -20,12 +20,11 @@ class MailController extends AbstractController
     public function index(\Swift_Mailer $mailer, Request $request): Response
     {
         $user = new User();
-        $form=$this->createForm(UserEmailType::class);
+        $form=$this->createForm(  UserEmailType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            //'Smetanina2002sme@gmail.com'
             $user = $form->getData();
             //find a user
             $em=$this->getDoctrine()->getManager();
@@ -34,10 +33,9 @@ class MailController extends AbstractController
             {
                 // Create a message
                 $message = (new \Swift_Message())
-                    //->setTo('camalovalsu29@gmail.com')
                     ->setTo($registered_user->getEmail())
                     ->setFrom('symfonist.mailer@gmail.com')
-                    ->setSubject('наконец-то получилось')
+                    ->setSubject('Воостановление доступа')
                     ->setBody(
                         $this->renderView(
                             '/mail/email.html.twig',
