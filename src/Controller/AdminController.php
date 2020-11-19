@@ -22,6 +22,7 @@ class AdminController extends AbstractController
      */
     public function index(AuthorizationCheckerInterface $authChecker): Response
     {
+        //проверка прав доступа
         if (false === $authChecker->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('manager');
         }
@@ -37,8 +38,13 @@ class AdminController extends AbstractController
     /**
      * @Route("public/admin/new", name="new_user")
      */
-    public function newUser(Request $request,UserPasswordEncoderInterface $encoder)
+    public function newUser(Request $request,UserPasswordEncoderInterface $encoder, AuthorizationCheckerInterface $authChecker)
     {
+        //проверка прав доступа
+        if (false === $authChecker->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('manager');
+        }
+
         $user = new User();
         $form =$this->createForm(UserType::class,$user);
         $form->handleRequest($request);
@@ -53,6 +59,7 @@ class AdminController extends AbstractController
             $user=$form->getData();
             $password=$password=$encoder->encodePassword($user,$user->getPassword());
             $user->setPassword($password);
+            $user->setRoles('ROLE_MANAGER');
             //$registered_user->setEmail($user->getEmail());
             //внести его в таблицу users
             $em->persist($user);
@@ -70,9 +77,12 @@ class AdminController extends AbstractController
     /**
      * @Route("public/admin/update/{id}", name="update_user")
      */
-    public function updateUser(Request $request,UserPasswordEncoderInterface $encoder, $id)
+    public function updateUser(Request $request,UserPasswordEncoderInterface $encoder, $id , AuthorizationCheckerInterface $authChecker)
     {
-        //хз
+        //проверка прав доступа
+        if (false === $authChecker->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('manager');
+        }
         $em=$this->getDoctrine()->getManager();
         $user=$em->getRepository(User::class)->find($id);
 
@@ -103,9 +113,13 @@ class AdminController extends AbstractController
     /**
      * @Route("public/admin/delete/{id}", name="delete_user")
      */
-    
-    public function deleteUser($id)
+    //delete, нельзя удалить себя(сделать проверку)
+    public function deleteUser($id,AuthorizationCheckerInterface $authChecker)
     {
+        //проверка прав доступа
+        if (false === $authChecker->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('manager');
+        }
         //Получить объект юзера для удаления из таблицы по id
         $em=$this->getDoctrine()->getManager();
         $user=$em->getRepository(User::class)->find($id);
