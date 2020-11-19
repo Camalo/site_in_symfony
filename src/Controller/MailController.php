@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class MailController extends AbstractController
 {
     /**
-     * @Route("public/login/mail", name="mail")
+     * @Route("login/mail", name="mail")
      */
     public function index(\Swift_Mailer $mailer, Request $request): Response
     {
@@ -60,7 +60,7 @@ class MailController extends AbstractController
     }
 
     /**
-     * @Route("public/login/reset", name="resetPassword")
+     * @Route("login/reset", name="resetPassword")
      */
     public function resetPassword(Request $request, UserPasswordEncoderInterface $encoder)
     {

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Entity\Books;
@@ -52,7 +53,7 @@ class BooksController extends AbstractController
 
 
     /**
-     * @Route("public/books/{book}", name="show_book")
+     * @Route("/books/{book}", name="show_book")
      */
     public function show_book($book)
     {
@@ -79,38 +80,51 @@ class BooksController extends AbstractController
 
     }
     /**
-     * @Route("public/categories/{category}", name="show_category")
+     * @Route("/categories/{category}", name="show_category")
      */
     public function show_category($category,Request $request,BookRepository $bookRepository)
     {
         
         $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator=$bookRepository->getBookInCat($offset,$category);
+        $perPage = max(1, $request->query->getInt('perPage', 2));
+        $paginator=$bookRepository->getBookInCat($offset,$perPage,$category);
+
+        //имя категории
+        $name=$_GET['name'];
 
 
         return $this->render('category/category.html.twig',[
             'books'=> $paginator,
+            'name'=> $name,
             'category' => $category,
-            'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
-            'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE)
+            'previous' => $offset - $perPage,
+            'next'=> min(count($paginator), $offset + $perPage),
+            'perpage'=>$perPage
         ]);
     }
     //Реализация поиска
     /**
-     * @Route("public/searching", name="search_book")
+     * @Route("/searching", name="search_book")
      */
     public function searchBook(Request $request,BookRepository $bookRepository)
     {
         $q = $_REQUEST['q'];
 
         $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator=$bookRepository->findBooks($offset,$q);
+        $perPage = max(1, $request->query->getInt('perPage', 10));
+
+        $paginator=$bookRepository->findBooks($offset,$perPage,$q);
 
 
         return $this->render('book/searching.html.twig',[
             'books'=> $paginator,
-            'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
-            'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE)
+            'previous' => $offset - $perPage,
+            'next'=> min(count($paginator), $offset + $perPage),
+            'perpage'=>$perPage,
+            'q'=>$q
         ]);
     }
+
+
+
 }
