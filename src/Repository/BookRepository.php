@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Books;
 use App\Entity\BooksInCategories;
-use App\Entity\Categories;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
@@ -24,10 +23,12 @@ class BookRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Books::class);
     }
-    public function getBooksPaginator(int $offset): Paginator
+    public function getBooksPaginator(int $offset, int $perPage): Paginator
     {
+        //offset смещение
+        //perPage на одной странице
         $query = $this->createQueryBuilder('b')
-            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setMaxResults($perPage)
             ->setFirstResult($offset)
             ->getQuery();
 
@@ -41,12 +42,43 @@ class BookRepository extends ServiceEntityRepository
             ->innerJoin(BooksInCategories::class, 'bic','WITH', 'bic.book_id = b.id')
             ->andWhere('bic.category_id= :category')
             ->setParameter('category',$category)
+            ->groupBy('b.title')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
             ->getQuery();
 
         return new Paginator($query);
     }
+
+    public function getBooksToAdd(int $offset, int $perPage,int $category)
+    {
+        $query = $this->createQueryBuilder('b')
+            //НЕ ИЗМЕНЯЛА ЕЩЕ
+            ->join(BooksInCategories::class, 'bic','WITH', 'bic.book_id = b.id')
+            ->andWhere('bic.category_id <> :category')
+            ->setParameter('category',$category)
+            ->groupBy('b.title')
+            ->setMaxResults($perPage)
+            ->setFirstResult($offset)
+            ->getQuery();
+
+        return new Paginator($query);
+    }
+    public function findBooks(int $offset, $q)
+    {
+        $query = $this->createQueryBuilder('b')
+            ->where('b.title LIKE :search_item')
+            ->orWhere('b.author LIKE :search_item')
+            ->orWhere('b.description LIKE :search_item')
+            ->setParameter('search_item', '%'.$q.'%')
+            ->groupBy('b.title')
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery();
+
+        return new Paginator($query);
+    }
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */
