@@ -1,36 +1,56 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\Books;
 use App\Entity\BooksInCategories;
 use App\Entity\Categories;
+use App\Form\AddBookInCatType;
+use App\Form\AddBookType;
+use App\Form\BookType;
+use App\Form\CategoriesType;
 use App\Repository\BookRepository;
-use Symfony\Component\HttpFoundation\Request;
+
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class BooksController extends AbstractController
 {
+
+    //must be in repository
+
+
     /**
      * @Route("/", name="homepage")
      */
     public function homepage(Request $request,BookRepository $bookRepository): Response
     {
         $entity_manager=$this->getDoctrine()->getManager();
+        //Смещение на 'offset' записей
         $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $bookRepository->getBooksPaginator($offset);
+        //отображение записей на одной странице, по умолчанию равно 10
+        $perPage = max(1, $request->query->getInt('perPage', 10));
+
+
+        $paginator = $bookRepository->getBooksPaginator($offset,$perPage);
 
         $categories=$entity_manager->getRepository(Categories::class)->findAll();
 
         return $this->render('index.html.twig', [
             'books' => $paginator,
             'categories' => $categories ,
-            'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
-            'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE)
+            'previous' => $offset - $perPage,
+            'next'=> min(count($paginator), $offset + $perPage),
+            'perpage'=>$perPage
         ]);
     }
+
+
     /**
      * @Route("/books/{book}", name="show_book")
      */
@@ -52,16 +72,18 @@ class BooksController extends AbstractController
 
         $categories=$entity_manager->getRepository(Categories::class)
             ->findBy(['id'=>$id]);
-        
+
         return $this->render('book/one_book.html.twig',[
             'book'=> $inf_book, 'categories'=>$categories
         ]);
+
     }
     /**
      * @Route("/categories/{category}", name="show_category")
      */
     public function show_category($category,Request $request,BookRepository $bookRepository)
     {
+        
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator=$bookRepository->getBookInCat($offset,$category);
 
@@ -69,6 +91,24 @@ class BooksController extends AbstractController
         return $this->render('category/category.html.twig',[
             'books'=> $paginator,
             'category' => $category,
+            'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
+            'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE)
+        ]);
+    }
+    //Реализация поиска
+    /**
+     * @Route("/searching", name="search_book")
+     */
+    public function searchBook(Request $request,BookRepository $bookRepository)
+    {
+        $q = $_REQUEST['q'];
+
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator=$bookRepository->findBooks($offset,$q);
+
+
+        return $this->render('book/searching.html.twig',[
+            'books'=> $paginator,
             'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
             'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE)
         ]);
