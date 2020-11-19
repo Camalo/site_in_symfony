@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class ManagerController extends AbstractController
 {
     /**
-     * @Route("/manager", name="manager")
+     * @Route("public/manager", name="manager")
      */
     public function index(AuthorizationCheckerInterface $authChecker,Request $request,BookRepository $bookRepository): Response
     {
