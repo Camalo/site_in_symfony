@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/public/admin", name="admin")
      */
     public function index(AuthorizationCheckerInterface $authChecker): Response
     {
@@ -35,7 +35,7 @@ class AdminController extends AbstractController
         ]);
     }
     /**
-     * @Route("/admin/new", name="new_user")
+     * @Route("/public/admin/new", name="new_user")
      */
     public function newUser(Request $request,UserPasswordEncoderInterface $encoder)
     {
@@ -68,7 +68,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/update/{id}", name="update_user")
+     * @Route("/public/admin/update/{id}", name="update_user")
      */
     public function updateUser(Request $request,UserPasswordEncoderInterface $encoder, $id)
     {
@@ -101,9 +101,9 @@ class AdminController extends AbstractController
         ]);
     }
     /**
-     * @Route("/admin/delete/{id}", name="delete_user")
+     * @Route("public/admin/delete/{id}", name="delete_user")
      */
-    //delete, нельзя удалить себя(сделать проверку)
+    
     public function deleteUser($id)
     {
         //Получить объект юзера для удаления из таблицы по id
@@ -126,19 +126,6 @@ class AdminController extends AbstractController
         return $this->render('admin/deleteUser.html.twig',[
             'username'=>$user->getUsername(),
             'error'=>""
-        ]);
-    }
-    /**
-     * @Route("/admin/extra/{id}", name="extra")
-     */
-    public function extra($id)
-    {
-
-
-        $user=$this->getUser();
-        echo $user->getRoles([1]);
-        return $this->render('manager/delete.html.twig',[
-            'name'=>""
         ]);
     }
 }
