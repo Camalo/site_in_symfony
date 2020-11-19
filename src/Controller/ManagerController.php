@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class ManagerController extends AbstractController
 {
     /**
-     * @Route("/manager", name="manager")
+     * @Route("public/manager", name="manager")
      */
     public function index(AuthorizationCheckerInterface $authChecker,Request $request,BookRepository $bookRepository): Response
     {
@@ -58,7 +58,7 @@ class ManagerController extends AbstractController
 
 
     /**
-     * @Route("/manager/new", name="new_book")
+     * @Route("/public/manager/new", name="new_book")
      */
     public function newBook(Request $request):Response
     {
@@ -83,7 +83,7 @@ class ManagerController extends AbstractController
         ]);
     }
     /**
-     * @Route("/manager/update/{id}", name="update_book")
+     * @Route("/public/manager/update/{id}", name="update_book")
      */
     public function updateBook(Request $request, $id)//:Response
     {
@@ -111,7 +111,7 @@ class ManagerController extends AbstractController
 
 
     /**
-     * @Route("/manager/delete/{id}", name="delete_book")
+     * @Route("/public/manager/delete/{id}", name="delete_book")
      */
     public function deleteBook($id)
     {
@@ -125,7 +125,7 @@ class ManagerController extends AbstractController
         ]);
     }
     /**
-     * @Route("/manager/update_cat/{id}", name="update_cat")
+     * @Route("public/manager/update_cat/{id}", name="update_cat")
      */
     public function updateCat($id,Request $request,BookRepository $bookRepository)
     {
@@ -160,7 +160,7 @@ class ManagerController extends AbstractController
     }
 
     /**
-     * @Route("/manager/add_to/{id}", name="add_to")
+     * @Route("/public/manager/add_to/{id}", name="add_to")
      */
     public function addBook(Request $request,$id)
     {
@@ -187,7 +187,7 @@ class ManagerController extends AbstractController
         ]);
     }
     /**
-     * @Route("/manager/delete_category/{id}", name="delete_category")
+     * @Route("/public/manager/delete_category/{id}", name="delete_category")
      */
     public function deleteCategory($id)
     {
@@ -202,7 +202,7 @@ class ManagerController extends AbstractController
     }
 
     /**
-     * @Route("/manager/delete_from/{catid}/{bookid}", name="delete_from")
+     * @Route("/public/manager/delete_from/{catid}/{bookid}", name="delete_from")
      */
     public function deleteFrom($catid,$bookid)
     {
