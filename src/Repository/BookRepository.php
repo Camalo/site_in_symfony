@@ -17,7 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BookRepository extends ServiceEntityRepository
 {
-    public const PAGINATOR_PER_PAGE = 2;
+    //public const PAGINATOR_PER_PAGE = 2;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -36,14 +36,14 @@ class BookRepository extends ServiceEntityRepository
         return new Paginator($query);
     }
 
-    public function getBookInCat(int $offset,int $category):Paginator
+    public function getBookInCat(int $offset,int $perPage, int $category):Paginator
     {
         $query = $this->createQueryBuilder('b')
             ->innerJoin(BooksInCategories::class, 'bic','WITH', 'bic.book_id = b.id')
             ->andWhere('bic.category_id= :category')
             ->setParameter('category',$category)
             ->groupBy('b.title')
-            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setMaxResults($perPage)
             ->setFirstResult($offset)
             ->getQuery();
 
@@ -64,7 +64,7 @@ class BookRepository extends ServiceEntityRepository
 
         return new Paginator($query);
     }
-    public function findBooks(int $offset, $q)
+    public function findBooks(int $offset,int $perPage, $q)
     {
         $query = $this->createQueryBuilder('b')
             ->where('b.title LIKE :search_item')
@@ -72,7 +72,7 @@ class BookRepository extends ServiceEntityRepository
             ->orWhere('b.description LIKE :search_item')
             ->setParameter('search_item', '%'.$q.'%')
             ->groupBy('b.title')
-            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setMaxResults($perPage)
             ->setFirstResult($offset)
             ->getQuery();
 

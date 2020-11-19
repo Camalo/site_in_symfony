@@ -11,10 +11,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fe3c9dd-294f-4bca-89f5-1addb9f4ab09" name="Default Changelist" comment="add public dir">
+      <change afterPath="$PROJECT_DIR$/templates/manager/error.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MailController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/mail/email.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mail/email.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/BooksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BooksController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ManagerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ManagerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/BookRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/BookRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/newUser.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/newUser.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/updateUser.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/updateUser.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/book/one_book.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/book/one_book.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/book/searching.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/book/searching.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/category/category.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/category/category.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/manager/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/manager/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +194,7 @@
       <workItem from="1605555236229" duration="7781000" />
       <workItem from="1605695078604" duration="15850000" />
       <workItem from="1605720230201" duration="15895000" />
-      <workItem from="1605774292423" duration="11997000" />
+      <workItem from="1605774292423" duration="25987000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1604001433349</created>

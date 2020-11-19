@@ -21,6 +21,7 @@ class ManagerController extends AbstractController
      */
     public function index(AuthorizationCheckerInterface $authChecker,Request $request,BookRepository $bookRepository): Response
     {
+        //проверка прав доступа
         if (false === $authChecker->isGranted('ROLE_MANAGER')) {
             return $this->redirectToRoute('app_login');
         }
@@ -60,8 +61,12 @@ class ManagerController extends AbstractController
     /**
      * @Route("/manager/new", name="new_book")
      */
-    public function newBook(Request $request):Response
+    public function newBook(Request $request,AuthorizationCheckerInterface $authChecker):Response
     {
+        //проверка прав доступа
+        if (false === $authChecker->isGranted('ROLE_MANAGER')) {
+            return $this->redirectToRoute('app_login');
+        }
         $book = new Books();
         $form =$this->createForm(BookType::class,$book);
         $form->handleRequest($request);
@@ -85,8 +90,12 @@ class ManagerController extends AbstractController
     /**
      * @Route("/manager/update/{id}", name="update_book")
      */
-    public function updateBook(Request $request, $id)//:Response
+    public function updateBook(Request $request, $id,AuthorizationCheckerInterface $authChecker)//:Response
     {
+        //проверка прав доступа
+        if (false === $authChecker->isGranted('ROLE_MANAGER')) {
+            return $this->redirectToRoute('app_login');
+        }
         $em=$this->getDoctrine()->getManager();
         $book=$em->getRepository(Books::class)->find($id);
 
@@ -113,8 +122,12 @@ class ManagerController extends AbstractController
     /**
      * @Route("/manager/delete/{id}", name="delete_book")
      */
-    public function deleteBook($id)
+    public function deleteBook($id,AuthorizationCheckerInterface $authChecker)
     {
+        //проверка прав доступа
+        if (false === $authChecker->isGranted('ROLE_MANAGER')) {
+            return $this->redirectToRoute('app_login');
+        }
         $em=$this->getDoctrine()->getManager();
         $book=$em->getRepository(Books::class)->find($id);
         $em->remove($book);
@@ -127,8 +140,13 @@ class ManagerController extends AbstractController
     /**
      * @Route("/manager/update_cat/{id}", name="update_cat")
      */
-    public function updateCat($id,Request $request,BookRepository $bookRepository)
+    public function updateCat($id,Request $request,BookRepository $bookRepository,AuthorizationCheckerInterface $authChecker)
     {
+        //проверка прав доступа
+        if (false === $authChecker->isGranted('ROLE_MANAGER')) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $em = $this->getDoctrine()->getManager();
         $editing_category = $em->getRepository(Categories::class)->find($id);
 
@@ -146,14 +164,17 @@ class ManagerController extends AbstractController
 
         //вывести список книг из этой категории
         $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator=$bookRepository->getBookInCat($offset,$id);
+        $perPage = max(1, $request->query->getInt('perPage', 10));
+        $paginator=$bookRepository->getBookInCat($offset,$perPage,$id);
+
         //удалить выбранную книгу из категории(удалить из таблицы bic)
 
         return $this->render('manager/updateCat.html.twig',[
             'books'=> $paginator,
             'category' => $editing_category,
-            'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
-            'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE),
+            'previous' => $offset - $perPage,
+            'next'=> min(count($paginator), $offset + $perPage),
+            'perpage'=>$perPage,
             'form'=> $form->createView()
         ]);
 
@@ -162,8 +183,12 @@ class ManagerController extends AbstractController
     /**
      * @Route("/manager/add_to/{id}", name="add_to")
      */
-    public function addBook(Request $request,$id)
+    public function addBook(Request $request,$id,AuthorizationCheckerInterface $authChecker)
     {
+        //проверка прав доступа
+        if (false === $authChecker->isGranted('ROLE_MANAGER')) {
+            return $this->redirectToRoute('app_login');
+        }
         //id-индекс книги
         $form =$this->createForm(CategoriesType::class);
         $form->handleRequest($request);
@@ -174,12 +199,19 @@ class ManagerController extends AbstractController
             $em=$this->getDoctrine()->getManager();
             $category=$em->getRepository(Categories::class)
                 ->findOneBy(['title'=>$categoryInForm->getTitle()]);
-            $bic=new BooksInCategories();
-            $bic->setBookId((int)$id);
-            $bic->setCategoryId($category->getId());
-            $em->persist($bic);
-            $em->flush();
-            return $this->redirectToRoute('manager');
+                if($category)
+                {
+                    $bic=new BooksInCategories();
+                    $bic->setBookId((int)$id);
+                    $bic->setCategoryId($category->getId());
+                    $em->persist($bic);
+                    $em->flush();
+                    return $this->redirectToRoute('manager');
+                }
+
+            return $this->render('manager/error.html.twig',[
+                'id' => $id
+            ]);
         }
         return $this->render('manager/AddTo.html.twig',[
             'form'=> $form->createView(),
@@ -189,8 +221,13 @@ class ManagerController extends AbstractController
     /**
      * @Route("/manager/delete_category/{id}", name="delete_category")
      */
-    public function deleteCategory($id)
+    public function deleteCategory($id,AuthorizationCheckerInterface $authChecker)
     {
+        //проверка прав доступа
+        if (false === $authChecker->isGranted('ROLE_MANAGER')) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $em=$this->getDoctrine()->getManager();
         $category=$em->getRepository(Categories::class)->find($id);
         $em->remove($category);
@@ -204,8 +241,12 @@ class ManagerController extends AbstractController
     /**
      * @Route("/manager/delete_from/{catid}/{bookid}", name="delete_from")
      */
-    public function deleteFrom($catid,$bookid)
+    public function deleteFrom($catid,$bookid,AuthorizationCheckerInterface $authChecker)
     {
+        //проверка прав доступа
+        if (false === $authChecker->isGranted('ROLE_MANAGER')) {
+            return $this->redirectToRoute('app_login');
+        }
         $em=$this->getDoctrine()->getManager();
         $bic=$em->getRepository(BooksInCategories::class)
             ->findOneBy(['category_id'=>$catid,'book_id'=>$bookid]);

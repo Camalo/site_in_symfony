@@ -86,14 +86,20 @@ class BooksController extends AbstractController
     {
         
         $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator=$bookRepository->getBookInCat($offset,$category);
+        $perPage = max(1, $request->query->getInt('perPage', 2));
+        $paginator=$bookRepository->getBookInCat($offset,$perPage,$category);
+
+        //имя категории
+        $name=$_GET['name'];
 
 
         return $this->render('category/category.html.twig',[
             'books'=> $paginator,
+            'name'=> $name,
             'category' => $category,
-            'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
-            'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE)
+            'previous' => $offset - $perPage,
+            'next'=> min(count($paginator), $offset + $perPage),
+            'perpage'=>$perPage
         ]);
     }
     //Реализация поиска
@@ -105,13 +111,17 @@ class BooksController extends AbstractController
         $q = $_REQUEST['q'];
 
         $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator=$bookRepository->findBooks($offset,$q);
+        $perPage = max(1, $request->query->getInt('perPage', 10));
+
+        $paginator=$bookRepository->findBooks($offset,$perPage,$q);
 
 
         return $this->render('book/searching.html.twig',[
             'books'=> $paginator,
-            'previous' => $offset - BookRepository::PAGINATOR_PER_PAGE,
-            'next'=> min(count($paginator), $offset + BookRepository::PAGINATOR_PER_PAGE)
+            'previous' => $offset - $perPage,
+            'next'=> min(count($paginator), $offset + $perPage),
+            'perpage'=>$perPage,
+            'q'=>$q
         ]);
     }
 
