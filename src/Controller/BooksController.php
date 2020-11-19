@@ -53,7 +53,7 @@ class BooksController extends AbstractController
 
 
     /**
-     * @Route("/books/{book}", name="show_book")
+     * @Route("public/books/{book}", name="show_book")
      */
     public function show_book($book)
     {
@@ -80,7 +80,7 @@ class BooksController extends AbstractController
 
     }
     /**
-     * @Route("/categories/{category}", name="show_category")
+     * @Route("public/categories/{category}", name="show_category")
      */
     public function show_category($category,Request $request,BookRepository $bookRepository)
     {
@@ -104,7 +104,7 @@ class BooksController extends AbstractController
     }
     //Реализация поиска
     /**
-     * @Route("/searching", name="search_book")
+     * @Route("public/searching", name="search_book")
      */
     public function searchBook(Request $request,BookRepository $bookRepository)
     {
