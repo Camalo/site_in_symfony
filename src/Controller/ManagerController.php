@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class ManagerController extends AbstractController
 {
     /**
-     * @Route("public/manager", name="manager")
+     * @Route("/manager", name="manager")
      */
     public function index(AuthorizationCheckerInterface $authChecker,Request $request,BookRepository $bookRepository): Response
     {
@@ -59,7 +59,7 @@ class ManagerController extends AbstractController
 
 
     /**
-     * @Route("public/manager/new", name="new_book")
+     * @Route("/manager/new", name="new_book")
      */
     public function newBook(Request $request,AuthorizationCheckerInterface $authChecker):Response
     {
@@ -88,7 +88,7 @@ class ManagerController extends AbstractController
         ]);
     }
     /**
-     * @Route("public/manager/update/{id}", name="update_book")
+     * @Route("/manager/update/{id}", name="update_book")
      */
     public function updateBook(Request $request, $id,AuthorizationCheckerInterface $authChecker)//:Response
     {
@@ -120,7 +120,7 @@ class ManagerController extends AbstractController
 
 
     /**
-     * @Route("public/manager/delete/{id}", name="delete_book")
+     * @Route("/manager/delete/{id}", name="delete_book")
      */
     public function deleteBook($id,AuthorizationCheckerInterface $authChecker)
     {
@@ -138,7 +138,7 @@ class ManagerController extends AbstractController
         ]);
     }
     /**
-     * @Route("public/manager/update_cat/{id}", name="update_cat")
+     * @Route("/manager/update_cat/{id}", name="update_cat")
      */
     public function updateCat($id,Request $request,BookRepository $bookRepository,AuthorizationCheckerInterface $authChecker)
     {
@@ -181,7 +181,7 @@ class ManagerController extends AbstractController
     }
 
     /**
-     * @Route("public/manager/add_to/{id}", name="add_to")
+     * @Route("/manager/add_to/{id}", name="add_to")
      */
     public function addBook(Request $request,$id,AuthorizationCheckerInterface $authChecker)
     {
@@ -219,7 +219,7 @@ class ManagerController extends AbstractController
         ]);
     }
     /**
-     * @Route("public/manager/delete_category/{id}", name="delete_category")
+     * @Route("/manager/delete_category/{id}", name="delete_category")
      */
     public function deleteCategory($id,AuthorizationCheckerInterface $authChecker)
     {
@@ -239,7 +239,7 @@ class ManagerController extends AbstractController
     }
 
     /**
-     * @Route("public/manager/delete_from/{catid}/{bookid}", name="delete_from")
+     * @Route("/manager/delete_from/{catid}/{bookid}", name="delete_from")
      */
     public function deleteFrom($catid,$bookid,AuthorizationCheckerInterface $authChecker)
     {
