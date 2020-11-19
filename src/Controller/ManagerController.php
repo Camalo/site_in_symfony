@@ -23,7 +23,7 @@ class ManagerController extends AbstractController
     {
         //проверка прав доступа
         if (false === $authChecker->isGranted('ROLE_MANAGER')) {
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('app_login');
         }
         $entity_manager=$this->getDoctrine()->getManager();
         $offset = max(0, $request->query->getInt('offset', 0));
