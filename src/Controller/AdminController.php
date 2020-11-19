@@ -24,7 +24,7 @@ class AdminController extends AbstractController
     {
         //проверка прав доступа
         if (false === $authChecker->isGranted('ROLE_ADMIN')) {
-            return $this->redirect('public/manager');
+            return $this->redirectToRoute('manager');
         }
 
         $em=$this->getDoctrine()->getManager();
