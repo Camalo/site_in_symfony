@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("public/admin", name="admin")
+     * @Route("/admin", name="admin")
      */
     public function index(AuthorizationCheckerInterface $authChecker): Response
     {
@@ -36,7 +36,7 @@ class AdminController extends AbstractController
         ]);
     }
     /**
-     * @Route("public/admin/new", name="new_user")
+     * @Route("/admin/new", name="new_user")
      */
     public function newUser(Request $request,UserPasswordEncoderInterface $encoder, AuthorizationCheckerInterface $authChecker)
     {
@@ -75,7 +75,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("public/admin/update/{id}", name="update_user")
+     * @Route("/admin/update/{id}", name="update_user")
      */
     public function updateUser(Request $request,UserPasswordEncoderInterface $encoder, $id , AuthorizationCheckerInterface $authChecker)
     {
@@ -111,7 +111,7 @@ class AdminController extends AbstractController
         ]);
     }
     /**
-     * @Route("public/admin/delete/{id}", name="delete_user")
+     * @Route("/admin/delete/{id}", name="delete_user")
      */
     //delete, нельзя удалить себя(сделать проверку)
     public function deleteUser($id,AuthorizationCheckerInterface $authChecker)
