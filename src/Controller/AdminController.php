@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Categories;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Security\AppUserAuthenticator;
+use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,20 +35,29 @@ class AdminController extends AbstractController
         ]);
     }
     /**
-     * @Route("/admin/create", name="create_user")
+     * @Route("/admin/new", name="new_user")
      */
-    public function newUser(Request $request)
+    public function newUser(Request $request,UserPasswordEncoderInterface $encoder)
     {
-        $user = new Books();
+        $user = new User();
         $form =$this->createForm(UserType::class,$user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $user=$form->getData();
             $em=$this->getDoctrine()->getManager();
+            //$registered_user = $em->getRepository(User::class)->findOneBy(['id'=>$id]);
+            //получить пассворт из формы
+
+            //$password=$encoder->encodePassword($user,strval($request->request->get('password')));
+            $user=$form->getData();
+            $password=$password=$encoder->encodePassword($user,$user->getPassword());
+            $user->setPassword($password);
+            //$registered_user->setEmail($user->getEmail());
+            //внести его в таблицу users
             $em->persist($user);
             $em->flush();
+
 
             return $this->redirectToRoute("admin",[
             ]);
@@ -85,7 +96,8 @@ class AdminController extends AbstractController
             return $this->redirectToRoute("admin");
         }
         return $this->render('admin/updateUser.html.twig',[
-            'form'=>$form->createView()
+            'form'=>$form->createView(),
+            'user'=>$user
         ]);
     }
     /**
@@ -94,13 +106,39 @@ class AdminController extends AbstractController
     //delete, нельзя удалить себя(сделать проверку)
     public function deleteUser($id)
     {
-
-        /*поменять
+        //Получить объект юзера для удаления из таблицы по id
         $em=$this->getDoctrine()->getManager();
         $user=$em->getRepository(User::class)->find($id);
+        //Получить авторизированного юзера
+        $deleter=$this->getUser();
+        // сравнить их логины
+        if ($user->getUsername()==$deleter->getUsername())
+        {
+            return $this->render('admin/deleteUser.html.twig',[
+                'username'=>$user->getUsername(),
+                'error'=>"error! You cant delete yourself"
+            ]);
+        }
+
         $em->remove($user);
         $em->flush();
-        */
-        return $this->render('admin/deleteUser.html.twig');
+
+        return $this->render('admin/deleteUser.html.twig',[
+            'username'=>$user->getUsername(),
+            'error'=>""
+        ]);
+    }
+    /**
+     * @Route("/admin/extra/{id}", name="extra")
+     */
+    public function extra($id)
+    {
+
+
+        $user=$this->getUser();
+        echo $user->getRoles([1]);
+        return $this->render('manager/delete.html.twig',[
+            'name'=>""
+        ]);
     }
 }
