@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("public/admin", name="admin")
+     * @Route("/admin", name="admin")
      */
     public function index(AuthorizationCheckerInterface $authChecker): Response
     {
