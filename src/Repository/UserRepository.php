@@ -42,18 +42,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
-/*
-    public function sendMail(\Swift_Mailer $mailer): Response
-    {
-        $name="Таня";
-        $this->mailer->send((new NotificationEmail())
-        ->subject('New comment posted')
-        ->htmlTemplate('mail/index.html.twig')
-        ->from($this->adminEmail)
-        ->to('smetanina2002sme@gmail.com')
-        ->context(['name' => $name])
-        );*/
-
 
     // /**
     //  * @return User[] Returns an array of User objects
@@ -72,15 +60,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?User
+
+    public function findOneBySomeField($email)
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('u.email = :val')
+            ->setParameter('val', $email)
             ->getQuery()
-            ->getOneOrNullResult()
+            //->getOneOrNullResult()
         ;
     }
-    */
+
 }
