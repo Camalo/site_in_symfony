@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{ user.id }}</td>
                         <td>{{ user.email }}</td>
-                        <td>{{ user.roles[0] }}</td>
+
                         <td><a class="btn btn-outline-primary" href="{{ path('update_user',{'id': user.id}) }}">Update</a></td>
                         <td><a class="btn btn-outline-primary" href="{{ path('delete_user',{'id': user.id}) }}">Delete</a></td>
                     </tr>

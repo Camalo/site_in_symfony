@@ -18,6 +18,10 @@
                         <label>Password</label>
                         <div>{{form_widget(form.password,{'attr': {'class': 'form-control' }})}}</div>
 
+                        {% for role in form.roles %}
+                        <label>Role</label>
+                        <div>{{form_widget(role,{'attr': {'class': 'form-control' }})}}</div>
+                        {% endfor %}
                         </div>
                     <button class="btn btn-primary">{{ button_label|default('Создать') }}</button>
 
