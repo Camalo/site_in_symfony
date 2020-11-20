@@ -59,7 +59,7 @@ class AdminController extends AbstractController
             $user=$form->getData();
             $password=$password=$encoder->encodePassword($user,$user->getPassword());
             $user->setPassword($password);
-            $user->setRoles('ROLE_MANAGER');
+            //$user->setRoles('ROLE_MANAGER');
             //$registered_user->setEmail($user->getEmail());
             //внести его в таблицу users
             $em->persist($user);
